@@ -12,7 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-package utils
+package lego
 
 import (
 	"bytes"
@@ -25,14 +25,12 @@ import (
 	"fmt"
 	"hash"
 	"math/big"
-	"net/url"
+	//	"net/url"
 	"reflect"
 	"strconv"
 	"time"
 
 	"github.com/astaxie/beego"
-
-	"github.com/beego/wetalk/setting"
 )
 
 func NumberEncode(number string, alphabet []byte) string {
@@ -164,7 +162,7 @@ func CreateTimeLimitCode(data string, minutes int, startInf interface{}) string 
 
 	// create sha1 encode string
 	sh := sha1.New()
-	sh.Write([]byte(data + setting.SecretKey + startStr + endStr + ToStr(minutes)))
+	sh.Write([]byte(data + "12222222223123" + startStr + endStr + ToStr(minutes)))
 	encoded := hex.EncodeToString(sh.Sum(nil))
 
 	code := fmt.Sprintf("%s%06d%s", startStr, minutes, encoded)
@@ -198,6 +196,7 @@ func EncodeHmac(secret, value string, params ...func() hash.Hash) string {
 	return hex.EncodeToString(hm.Sum(nil))
 }
 
+/*
 func TimesReachedTest(key string, times int) (int, bool) {
 	var retries int
 	if v := setting.Cache.Get(key); v != nil {
@@ -214,7 +213,7 @@ func TimesReachedTest(key string, times int) (int, bool) {
 func TimesReachedSet(key string, times int, reloadMinutes int) {
 	setting.Cache.Put(key, times+1, int64(reloadMinutes)*60)
 }
-
+*/
 // convert string to specify type
 
 type StrTo string
@@ -396,6 +395,7 @@ func (a argAny) Get(i int, args ...interface{}) (r interface{}) {
 	return
 }
 
+/*
 func IsMatchHost(uri string) bool {
 	if len(uri) == 0 {
 		return false
@@ -412,3 +412,4 @@ func IsMatchHost(uri string) bool {
 
 	return true
 }
+*/
